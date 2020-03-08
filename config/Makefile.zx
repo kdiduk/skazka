@@ -1,0 +1,18 @@
+# Make configuration for ZX Spectrum target
+CC = zcc
+LD = zcc
+AR = appmake
+
+# Origin of the game binary. Default value is 32768.
+# For other values, add `-zorg=${ZORG}` option to `zcc` command.
+ZORG=32768
+
+CFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
+	-pragma-include:config/zpragma.inc
+LDFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
+	-pragma-include:config/zpragma.inc
+ARFLAGS = +zx --blockname $(PROJECT) --org $(ZORG)
+
+# additional rule to make loadable tape-file
+APPMAKE = $(AR) $(ARFLAGS) -b $(PROJECT)_CODE.bin -o $(PROJECT).tap
+

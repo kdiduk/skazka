@@ -1,0 +1,6 @@
+# Make configuration for Linux target
+CC = gcc
+LD = gcc
+CFLAGS = -Wall -Wextra
+LDFLAGS =
+

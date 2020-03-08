@@ -18,10 +18,3 @@
 #
 # #############################################################################
 
-skazka: main.o
-	$(CC) -o skazka main.o
-
-main.o: src/main.c
-	$(CC) -c src/main.c
-
-# EOF

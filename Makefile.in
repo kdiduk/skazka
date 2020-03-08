@@ -1,0 +1,15 @@
+# Global configuration
+PROJECT=skazka
+
+# #############################################################################
+# Rules for building the project
+# #############################################################################
+
+$(PROJECT): main.o
+	$(CC) $(LDFLAGS) -o $(PROJECT) main.o
+	$(APPMAKE)
+
+main.o: src/main.c
+	$(CC) $(CFLAGS) -c src/main.c -o main.o
+
+# EOF
