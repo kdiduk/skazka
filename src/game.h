@@ -18,23 +18,11 @@
 
 * ************************************************************************** */
 
-/**
- * \file        main.c
- * \brief       Contains entry-point function `main()` of "Skazka" game.
- * \author      Kirill Diduk
- * \date        08 March, 2020
- * \copyright   GNU General Public License
- */
-#include "game.h"
-#include <stdlib.h>
+#ifndef SKAZKA_GAME_H
+#define SKAZKA_GAME_H
 
-int main(void)
-{
-        game_init();
-        game_run();
-        game_shutdown();
+void game_init(void);
+void game_run(void);
+void game_shutdown(void);
 
-        return EXIT_SUCCESS;
-}
-
-/* EOF */
+#endif /* SKAZKA_GAME_H */

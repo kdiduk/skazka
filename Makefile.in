@@ -1,15 +1,25 @@
 # Global configuration
-PROJECT=skazka
+PROJECT = skazka
+
+SRCDIR = src
+OBJDIR = obj
+
+OBJECTS = $(addprefix $(OBJDIR)/, \
+	game.o	\
+	main.o)
 
 # #############################################################################
 # Rules for building the project
 # #############################################################################
 
-$(PROJECT): main.o
-	$(CC) $(LDFLAGS) -o $(PROJECT) main.o
+$(PROJECT): prebuild $(OBJECTS)
+	$(CC) $(LDFLAGS) -o $(PROJECT) $(OBJECTS)
 	$(APPMAKE)
 
-main.o: src/main.c
-	$(CC) $(CFLAGS) -c src/main.c -o main.o
+$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+	$(CC) $(CFLAGS) -c $< -o $@
+
+prebuild:
+	mkdir -p obj
 
 # EOF
