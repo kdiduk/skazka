@@ -18,9 +18,9 @@
 
 * ************************************************************************** */
 
-/**
+/*!
  * \file        main.c
- * \brief       Contains entry-point function `main()` of "Skazka" game.
+ * \brief       Contains entry-point function main() of "Skazka" game.
  * \author      Kirill Diduk
  * \date        08 March, 2020
  * \copyright   GNU General Public License

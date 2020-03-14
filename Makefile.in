@@ -1,12 +1,13 @@
 # Global configuration
 PROJECT = skazka
 
-SRCDIR = src
+VPATH = src:src/scenes
 OBJDIR = obj
 
 OBJECTS = $(addprefix $(OBJDIR)/, \
 	game.o	\
-	main.o)
+	main.o	\
+	scene.o)
 
 # #############################################################################
 # Rules for building the project
@@ -16,7 +17,7 @@ $(PROJECT): prebuild $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $(PROJECT) $(OBJECTS)
 	$(APPMAKE)
 
-$(OBJECTS): $(OBJDIR)/%.o : $(SRCDIR)/%.c
+$(OBJECTS): $(OBJDIR)/%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 prebuild:

@@ -18,21 +18,37 @@
 
 * ************************************************************************** */
 
-#include <stdio.h>
-#include "scenes/scene.h"
-#include "game.h"
+/*!
+ * \file        scenes/scene.c
+ * \brief       Implementation of "scene" module.
+ * \author      Kirill Diduk
+ * \date        14 March 2020, 14:03
+ * \copyright   GNU General Public License
+ */
+
+#include "scene.h"
 
 
-void game_init(void)
+static enum sceneid current_scene = SCENE_INITIAL;
+
+
+void scene_update(void)
+{
+        (void) current_scene;
+}
+
+void scene_switch(enum sceneid id)
+{
+        (void) id;
+}
+
+void scene_push(enum sceneid id)
+{
+        (void) id;
+}
+
+void scene_pop(void)
 {
 }
 
-void game_run(void)
-{
-        scene_update();
-        printf("Hello, world\n");
-}
-
-void game_shutdown(void)
-{
-}
+/* EOF */
