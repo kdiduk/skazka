@@ -2,7 +2,7 @@
 PROJECT = skazka
 
 VPATH = src:src/scenes
-OBJDIR = obj
+OBJDIR = obj/$(TARGET)
 
 OBJECTS = $(addprefix $(OBJDIR)/, \
 	game.o	\
@@ -21,6 +21,6 @@ $(OBJECTS): $(OBJDIR)/%.o : %.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 prebuild:
-	mkdir -p obj
+	mkdir -p $(OBJDIR)
 
 # EOF
