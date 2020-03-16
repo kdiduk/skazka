@@ -26,6 +26,7 @@
  * \copyright   GNU General Public License
  */
 
+#include "title/title_scene.h"
 #include "scene.h"
 
 
@@ -34,12 +35,18 @@ static enum sceneid current_scene = SCENE_INITIAL;
 
 void scene_update(void)
 {
-        (void) current_scene;
+        switch (current_scene) {
+                case SCENE_TITLE:
+                        title_scene_update();
+                        break;
+                default:
+                        break;
+        }
 }
 
 void scene_switch(enum sceneid id)
 {
-        (void) id;
+        current_scene = id;
 }
 
 void scene_push(enum sceneid id)

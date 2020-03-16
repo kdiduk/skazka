@@ -18,39 +18,17 @@
 
 * ************************************************************************** */
 
-/*!
- * \file        game.c
- *
- * \brief       Implementation of "game" module.
- *
- * \author      Kirill Diduk (kirill.diduk@mail.ru)
- * \date        8 March 2020, 20:39
- * \copyright   GNU General Public License
- */
+#include <stdio.h>
 
-#include <stdbool.h>
-
-#include "scenes/scene.h"
 #include "game.h"
+#include "title_scene.h"
 
-bool running;
 
-void game_init(void)
+void title_scene_update(void)
 {
-}
+        printf("Hello, world\n");
 
-void game_run(void)
-{
-        running = true;
-
-        while (running) {
-                scene_update();
-        }
-}
-
-void game_quit(void)
-{
-        running = false;
+        game_quit();
 }
 
 /* EOF */

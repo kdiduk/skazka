@@ -18,11 +18,46 @@
 
 * ************************************************************************** */
 
+/*!
+ * \file        game.h
+ *
+ * \brief       Interface of "game" module.
+ *
+ * \details     A top-level module which is responsible for initialization of
+ *   other submodules (particularly initializing the platform layer) and run
+ *   the main game loop.
+ *
+ * \author      Kirill Diduk (kirill.diduk@mail.ru)
+ * \date        8 March 2020, 20:39
+ * \copyright   GNU General Public License
+ */
+
 #ifndef SKAZKA_GAME_H
 #define SKAZKA_GAME_H
 
+
+/*!
+ * \brief       Initializes the game and it's submodules before the run.
+ */
 void game_init(void);
+
+/*!
+ * \brief       Runs the game main loop.
+ */
 void game_run(void);
-void game_shutdown(void);
+
+/*!
+ * \brief       Function to quit the game in normal mode.
+ *
+ * \details     This function is normally called by one of the scenes to
+ *   finish the game and quit to system. This is a normal mode to quit
+ *   the game program. In fact this function ceases the main game loop
+ *   and shuts down all the submodules. In other words, it performs a
+ *   graceful shutdown.
+ *
+ */
+void game_quit(void);
 
 #endif /* SKAZKA_GAME_H */
+
+/* EOF */

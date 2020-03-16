@@ -24,9 +24,16 @@
  * \brief       Interface of "scene" module.
  *
  * \details     Scene module implements a mechanism for organizing
- *  high-level game logic as a set of scenes, and switching between them.
- *  Each individual scene is a kind of game screen.
- *  For example, title screen scene, in-level scene, battle scene, etc.
+ *   high-level game logic as a set of scenes, and switching between them.
+ *   Each individual scene is a kind of game screen.
+ *   For example, title screen scene, in-level scene, battle scene, etc.
+ *   Scene module works as a finite-state machine. In essens it works more
+ *   or less as a "State" design pattern from "Gang of Four" book.
+ *   Individual scenes represent states. Switching between scenes (states)
+ *   are done by the scenes themselves. In general, any scene may switch
+ *   to any other scene, however none of the scenes may "know" the details
+ *   of implementation of any other scene. Scenes only may know about
+ *   existence of each other through the enum sceneid.
  *
  * \author      Kirill Diduk
  * \date        14 March 2020, 13:07
@@ -53,11 +60,11 @@ enum sceneid {
 
 
 /*!
- * \brief       Updates current scene.
+ * \brief       Updates current active scene.
  *
  * \details     This function is periodically called in the game loop.
  *   In essence it delegates the call to the update function of the
- *   current scene which was previously set by scene_switch() call.
+ *   current active scene which was previously set by scene_switch() call.
  *
  * \sa          scene_switch(enum sceneid)
  */

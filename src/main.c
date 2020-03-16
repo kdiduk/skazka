@@ -25,6 +25,7 @@
  * \date        08 March, 2020
  * \copyright   GNU General Public License
  */
+
 #include "game.h"
 #include <stdlib.h>
 
@@ -32,7 +33,6 @@ int main(void)
 {
         game_init();
         game_run();
-        game_shutdown();
 
         return EXIT_SUCCESS;
 }

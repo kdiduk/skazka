@@ -18,39 +18,23 @@
 
 * ************************************************************************** */
 
+#ifndef SKAZKA_TITLE_SCENE_H
+#define SKAZKA_TITLE_SCENE_H
+
 /*!
- * \file        game.c
+ * \file        scenes/title/title_scene.h
  *
- * \brief       Implementation of "game" module.
+ * \brief       Interface of "title_scene" module.
  *
- * \author      Kirill Diduk (kirill.diduk@mail.ru)
- * \date        8 March 2020, 20:39
+ * \details     "Title" scene represents a title screen of the game.
+ *
+ * \author      Kirill Diduk
+ * \date        15 March 2020, 09:52
  * \copyright   GNU General Public License
  */
 
-#include <stdbool.h>
+void title_scene_update(void);
 
-#include "scenes/scene.h"
-#include "game.h"
-
-bool running;
-
-void game_init(void)
-{
-}
-
-void game_run(void)
-{
-        running = true;
-
-        while (running) {
-                scene_update();
-        }
-}
-
-void game_quit(void)
-{
-        running = false;
-}
+#endif /* SKAZKA_TITLE_SCENE_H */
 
 /* EOF */

@@ -1,13 +1,15 @@
 # Global configuration
-PROJECT = skazka
 
-VPATH = src:src/scenes
+VPATH = src:src/scenes:src/scenes/title
 OBJDIR = obj/$(TARGET)
-
+BINDIR = bin/$(TARGET)
+INCLUDE = -Isrc
 OBJECTS = $(addprefix $(OBJDIR)/, \
-	game.o	\
-	main.o	\
-	scene.o)
+	game.o		\
+	main.o		\
+	scene.o		\
+	title_scene.o	\
+	)
 
 # #############################################################################
 # Rules for building the project
@@ -16,11 +18,19 @@ OBJECTS = $(addprefix $(OBJDIR)/, \
 $(PROJECT): prebuild $(OBJECTS)
 	$(CC) $(LDFLAGS) -o $(PROJECT) $(OBJECTS)
 	$(APPMAKE)
+	mkdir -p $(BINDIR)
+	mv $(BINFILE) $(BINDIR)/$(BINFILE)
+
 
 $(OBJECTS): $(OBJDIR)/%.o : %.c
-	$(CC) $(CFLAGS) -c $< -o $@
+	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 prebuild:
 	mkdir -p $(OBJDIR)
+
+.PHONY: clean
+clean:
+	rm $(OBJECTS)
+	$(TARGET_CLEAN)
 
 # EOF
