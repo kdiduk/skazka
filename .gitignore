@@ -1,4 +1,5 @@
+bin/
 obj/
 tools/skazka.geany
 Makefile
-skazka
+zcc_opt.def

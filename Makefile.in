@@ -16,21 +16,18 @@ OBJECTS = $(addprefix $(OBJDIR)/, \
 # #############################################################################
 
 $(PROJECT): prebuild $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $(PROJECT) $(OBJECTS)
+	$(CC) $(LDFLAGS) -o $(BINDIR)/$(PROJECT) $(OBJECTS)
 	$(APPMAKE)
-	mkdir -p $(BINDIR)
-	mv $(BINFILE) $(BINDIR)/$(BINFILE)
-
 
 $(OBJECTS): $(OBJDIR)/%.o : %.c
 	$(CC) $(CFLAGS) $(INCLUDE) -c $< -o $@
 
 prebuild:
 	mkdir -p $(OBJDIR)
+	mkdir -p $(BINDIR)
 
 .PHONY: clean
 clean:
 	rm $(OBJECTS)
-	$(TARGET_CLEAN)
 
 # EOF

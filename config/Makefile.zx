@@ -1,5 +1,4 @@
 # Make configuration for ZX Spectrum target
-BINFILE=$(PROJECT).tap
 CC = zcc
 LD = zcc
 AR = appmake
@@ -10,11 +9,12 @@ ZORG=32768
 
 CFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
 	-pragma-include:config/zpragma.inc -preserve
+
 LDFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
 	-pragma-include:config/zpragma.inc
+
 ARFLAGS = +zx --blockname $(PROJECT) --org $(ZORG)
 
 # additional rule to make loadable tape-file
-APPMAKE = $(AR) $(ARFLAGS) -b $(PROJECT)_CODE.bin -o $(BINFILE)
-
-TARGET_CLEAN = rm $(PROJECT)_CODE.bin $(PROJECT)_UNASSIGNED.bin zcc_opt.def
+APPMAKE = $(AR) $(ARFLAGS) -b $(BINDIR)/$(PROJECT)_CODE.bin \
+	-o $(BINDIR)/$(PROJECT).tap

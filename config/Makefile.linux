@@ -1,5 +1,4 @@
 # Make configuration for Linux target
-BINFILE=$(PROJECT)
 CC = gcc
 LD = gcc
 CFLAGS = -Wall -Wextra
