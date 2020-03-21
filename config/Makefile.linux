@@ -3,3 +3,6 @@ CC = gcc
 LD = gcc
 CFLAGS = -Wall -Wextra
 LDFLAGS =
+
+PVPATH=src/platform/sdl
+POBJECTS = pinput_sdl.o

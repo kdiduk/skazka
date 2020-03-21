@@ -1,6 +1,6 @@
 # Global configuration
 
-VPATH = src:src/scenes:src/scenes/title
+VPATH = src:src/scenes:src/scenes/title:$(PVPATH)
 OBJDIR = obj/$(TARGET)
 BINDIR = bin/$(TARGET)
 INCLUDE = -Isrc
