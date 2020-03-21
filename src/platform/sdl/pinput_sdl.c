@@ -29,7 +29,7 @@
  * \copyright   GNU General Public License
  */
 
-#include "platrofm/pinput.h"
+#include "platform/pinput.h"
 
 
 bool pinput_pressed(enum pinput_key key)

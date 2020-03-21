@@ -5,6 +5,7 @@ OBJDIR = obj/$(TARGET)
 BINDIR = bin/$(TARGET)
 INCLUDE = -Isrc
 OBJECTS = $(addprefix $(OBJDIR)/, \
+	$(POBJECTS)	\
 	game.o		\
 	main.o		\
 	scene.o		\

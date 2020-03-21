@@ -11,10 +11,10 @@ POBJECTS = pinput_zx.o
 ZORG=32768
 
 CFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
-	-pragma-include:config/zpragma.inc -preserve
+	-pragma-include:build/zx/zpragma.inc -preserve
 
 LDFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
-	-pragma-include:config/zpragma.inc
+	-pragma-include:build/zx/zpragma.inc
 
 ARFLAGS = +zx --blockname $(PROJECT) --org $(ZORG)
 
