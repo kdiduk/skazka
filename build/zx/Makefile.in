@@ -3,7 +3,7 @@ CC = zcc
 LD = zcc
 AR = appmake
 
-PVPATH=src/platform/sdl
+PVPATH=src/platform/zx
 POBJECTS = pinput_zx.o
 
 # Origin of the game binary. Default value is 32768.
