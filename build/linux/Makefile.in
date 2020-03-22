@@ -4,5 +4,5 @@ LD = gcc
 CFLAGS = -Wall -Wextra
 LDFLAGS =
 
-PVPATH=src/platform/sdl
-POBJECTS = pinput_sdl.o
+PVPATH = src/platform/sdl
+POBJECTS = platform_sdl.o pinput_sdl.o

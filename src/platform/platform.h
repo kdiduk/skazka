@@ -21,48 +21,25 @@
 * ************************************************************************** */
 
 /*!
- * \file        game.c
+ * \file        platform/platform.h
  *
- * \brief       Implementation of "game" module.
- *
- * \author      Kirill Diduk (kirill.diduk@mail.ru)
- * \date        8 March 2020, 20:39
+ * \brief       Platform-abstraction layer functions.
+ * \author      Kirill Diduk
+ * \date        21 March 2020, 21:43
  * \copyright   GNU General Public License
  */
 
-#include <stdbool.h>
-
-#include "platform/platform.h"
-#include "scenes/scene.h"
-#include "game.h"
+#ifndef SKAZKA_PLATFORM_H
+#define SKAZKA_PLATFORM_H
 
 
-bool running;
+void platform_init(void);
+
+void platform_update(void);
+
+void platform_shutdown(void);
 
 
-void game_init(void)
-{
-        platform_init();
-}
-
-
-void game_run(void)
-{
-        running = true;
-
-        while (running == true) {
-                platform_update();
-                scene_update();
-        }
-
-        platform_shutdown();
-}
-
-
-void game_quit(void)
-{
-        running = false;
-}
-
+#endif /* SKAZKA_PLATFORM_H */
 
 /* EOF */

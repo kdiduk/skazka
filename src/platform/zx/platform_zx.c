@@ -21,48 +21,27 @@
 * ************************************************************************** */
 
 /*!
- * \file        game.c
+ * \file        platform/zx/platform_zx.c
  *
- * \brief       Implementation of "game" module.
- *
+ * \brief       Implementation of platform-abstraction layer for ZX Spectrum.
  * \author      Kirill Diduk (kirill.diduk@mail.ru)
- * \date        8 March 2020, 20:39
+ * \date        21 March 2020, 21:57
  * \copyright   GNU General Public License
  */
 
-#include <stdbool.h>
-
 #include "platform/platform.h"
-#include "scenes/scene.h"
-#include "game.h"
 
 
-bool running;
-
-
-void game_init(void)
+void platform_init(void)
 {
-        platform_init();
 }
 
-
-void game_run(void)
+void platform_update(void)
 {
-        running = true;
-
-        while (running == true) {
-                platform_update();
-                scene_update();
-        }
-
-        platform_shutdown();
 }
 
-
-void game_quit(void)
+void platform_shutdown(void)
 {
-        running = false;
 }
-
 
 /* EOF */

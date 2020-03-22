@@ -3,8 +3,8 @@ CC = zcc
 LD = zcc
 AR = appmake
 
-PVPATH=src/platform/zx
-POBJECTS = pinput_zx.o
+PVPATH = src/platform/zx
+POBJECTS = platform_zx.o pinput_zx.o
 
 # Origin of the game binary. Default value is 32768.
 # For other values, add `-zorg=${ZORG}` option to `zcc` command.
