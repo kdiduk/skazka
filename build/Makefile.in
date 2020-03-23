@@ -17,7 +17,7 @@ OBJECTS = $(addprefix $(OBJDIR)/, \
 # #############################################################################
 
 $(PROJECT): prebuild $(OBJECTS)
-	$(CC) $(LDFLAGS) -o $(BINDIR)/$(PROJECT) $(OBJECTS)
+	$(CC) $(OBJECTS) $(LDFLAGS) -o $(BINDIR)/$(PROJECT)
 	$(APPMAKE)
 
 $(OBJECTS): $(OBJDIR)/%.o : %.c

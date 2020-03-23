@@ -29,19 +29,61 @@
  * \copyright   GNU General Public License
  */
 
+#include <SDL2/SDL.h>
+
 #include "platform/platform.h"
 
 
-void platform_init(void)
+SDL_Window* window = NULL;
+SDL_Surface* screen = NULL;
+
+
+bool platform_init(void)
 {
+        if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+                SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+                return false;
+        }
+
+        window = SDL_CreateWindow("Skazka",
+                SDL_WINDOWPOS_UNDEFINED,
+                SDL_WINDOWPOS_UNDEFINED,
+                256*3,
+                192*3,
+                SDL_WINDOW_SHOWN);
+        if (window == NULL) {
+                SDL_Log("Could not create window: %s\n", SDL_GetError());
+                return false;
+        }
+
+        screen = SDL_GetWindowSurface(window);
+        if (screen == NULL) {
+                SDL_Log("Could not get window surface: %s\n", SDL_GetError());
+                return false;
+        }
+
+        Uint32 color = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
+        SDL_FillRect(screen, NULL, color);
+
+        return true;
 }
+
 
 void platform_update(void)
 {
+        SDL_UpdateWindowSurface(window);
+        SDL_Delay(5000);
 }
+
 
 void platform_shutdown(void)
 {
+        if (window != NULL) {
+                SDL_DestroyWindow(window);
+                window = NULL;
+        }
+
+        SDL_Quit();
 }
 
 /* EOF */

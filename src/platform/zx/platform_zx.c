@@ -32,8 +32,9 @@
 #include "platform/platform.h"
 
 
-void platform_init(void)
+bool platform_init(void)
 {
+        return true;
 }
 
 void platform_update(void)

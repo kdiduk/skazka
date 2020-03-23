@@ -1,7 +1,7 @@
 # Make configuration for ZX Spectrum target
-CC = zcc
-LD = zcc
-AR = appmake
+CC = zcc +zx
+LD = zcc +zx
+AR = appmake +zx
 
 PVPATH = src/platform/zx
 POBJECTS = platform_zx.o pinput_zx.o
@@ -10,13 +10,13 @@ POBJECTS = platform_zx.o pinput_zx.o
 # For other values, add `-zorg=${ZORG}` option to `zcc` command.
 ZORG=32768
 
-CFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
+CFLAGS = -Wall -clib=sdcc_iy -zorg=${ZORG} \
 	-pragma-include:build/zx/zpragma.inc -preserve
 
-LDFLAGS = +zx -Wall -clib=sdcc_iy -zorg=${ZORG} \
+LDFLAGS = -Wall -clib=sdcc_iy -zorg=${ZORG} \
 	-pragma-include:build/zx/zpragma.inc
 
-ARFLAGS = +zx --blockname $(PROJECT) --org $(ZORG)
+ARFLAGS = --blockname $(PROJECT) --org $(ZORG)
 
 # additional rule to make loadable tape-file
 APPMAKE = $(AR) $(ARFLAGS) -b $(BINDIR)/$(PROJECT)_CODE.bin \

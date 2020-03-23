@@ -2,7 +2,7 @@
 CC = gcc
 LD = gcc
 CFLAGS = -Wall -Wextra
-LDFLAGS =
+LDFLAGS = -lSDL2
 
 PVPATH = src/platform/sdl
 POBJECTS = platform_sdl.o pinput_sdl.o

@@ -32,8 +32,10 @@
 #ifndef SKAZKA_PLATFORM_H
 #define SKAZKA_PLATFORM_H
 
+#include <stdbool.h>
 
-void platform_init(void);
+
+bool platform_init(void);
 
 void platform_update(void);
 
