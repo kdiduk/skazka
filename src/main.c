@@ -1,5 +1,7 @@
 /* ************************************************************************** *
 
+    SPDX-License-Identifier: GPL-3.0-or-later
+
     Skazka - a game for ZX Spectrum computer.
     Copyright (C) 2020 Kirill Diduk (kirill.diduk@mail.ru)
 
@@ -21,13 +23,15 @@
 /*!
  * \file        main.c
  * \brief       Contains entry-point function main() of "Skazka" game.
- * \author      Kirill Diduk
+ * \author      Kirill Diduk (kirill.diduk@mail.ru)
  * \date        08 March, 2020
  * \copyright   GNU General Public License
  */
 
 #include "game.h"
+
 #include <stdlib.h>
+
 
 int main(void)
 {
