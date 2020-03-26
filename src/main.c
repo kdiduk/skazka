@@ -28,9 +28,9 @@
  * \copyright   GNU General Public License
  */
 
-#include "game.h"
-
 #include <stdlib.h>
+
+#include "game.h"
 
 
 int main(void)
