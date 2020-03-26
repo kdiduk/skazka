@@ -1,5 +1,7 @@
 /* ************************************************************************** *
 
+    SPDX-License-Identifier: GPL-3.0-or-later
+
     Skazka - a game for ZX Spectrum computer.
     Copyright (C) 2020 Kirill Diduk (kirill.diduk@mail.ru)
 
@@ -18,17 +20,26 @@
 
 * ************************************************************************** */
 
-#include <stdio.h>
+/*!
+ * \file        scenes/title/title_scene.c
+ *
+ * \brief       Implementation of "title_scene" module.
+ * \author      Kirill Diduk (kirill.diduk@mail.ru)
+ * \date        15 March 2020, 09:52
+ * \copyright   GNU General Public License
+ */
 
+#include "platform/pinput.h"
 #include "game.h"
 #include "title_scene.h"
 
 
 void title_scene_update(void)
 {
-        printf("Hello, world\n");
-
-        game_quit();
+        if (pinput_pressed(INKEY_ENTER) == true) {
+                game_quit();
+        }
 }
+
 
 /* EOF */

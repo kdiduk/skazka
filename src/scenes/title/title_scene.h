@@ -1,5 +1,7 @@
 /* ************************************************************************** *
 
+    SPDX-License-Identifier: GPL-3.0-or-later
+
     Skazka - a game for ZX Spectrum computer.
     Copyright (C) 2020 Kirill Diduk (kirill.diduk@mail.ru)
 
@@ -33,7 +35,9 @@
  * \copyright   GNU General Public License
  */
 
+
 void title_scene_update(void);
+
 
 #endif /* SKAZKA_TITLE_SCENE_H */
 
