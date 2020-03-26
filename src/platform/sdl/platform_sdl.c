@@ -31,6 +31,7 @@
 
 #include <SDL2/SDL.h>
 
+#include "platform/sdl/pinput_sdl.h"
 #include "platform/platform.h"
 
 
@@ -72,7 +73,8 @@ bool platform_init(void)
 void platform_update(void)
 {
         SDL_UpdateWindowSurface(window);
-        SDL_Delay(5000);
+        SDL_Delay(20);
+        pinput_sdl_update();
 }
 
 

@@ -21,52 +21,16 @@
 * ************************************************************************** */
 
 /*!
- * \file        platform/sdl/pinput_sdl.c
+ * \file        platform/sdl/pinput_sdl.h
  *
- * \brief       SDL implementation of keyboar input module.
+ * \brief       Contains functions used internally related to input handling.
  * \author      Kirill Diduk
- * \date        21 March 2020, 15:32
+ * \date        24 March 2020, 21:53
  * \copyright   GNU General Public License
  */
 
-#include <SDL2/SDL_events.h>
-#include <stdbool.h>
 
-#include "platform/pinput.h"
-#include "game.h"
+void pinput_sdl_update(void);
 
-
-static void update_key_pressed(SDL_Event* event, bool pressed);
-
-
-bool pinput_pressed(enum pinput_key key)
-{
-        (void) key;
-
-        return false;
-}
-
-
-void pinput_sdl_update(void)
-{
-        SDL_Event event;
-
-        while (SDL_PollEvent(&event) == 1) {
-                if(event.type == SDL_QUIT) {
-                        game_quit();
-                } else if (event.type == SDL_KEYDOWN) {
-                        update_key_pressed(&event, true);
-                } else if (event.type == SDL_KEYUP) {
-                        update_key_pressed(&event, false);
-                }
-        }
-}
-
-
-static void update_key_pressed(SDL_Event* event, bool pressed)
-{
-        (void) event;
-        (void) pressed;
-}
 
 /* EOF */
