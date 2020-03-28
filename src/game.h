@@ -35,11 +35,13 @@
 #ifndef SKAZKA_GAME_H
 #define SKAZKA_GAME_H
 
+#include <stdbool.h>
+
 
 /*!
  * \brief       Initializes the game and it's submodules before the run.
  */
-void game_init(void);
+bool game_init(void);
 
 /*!
  * \brief       Runs the game main loop.

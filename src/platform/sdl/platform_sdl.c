@@ -30,13 +30,28 @@
  */
 
 #include <SDL2/SDL.h>
+#include <stdlib.h>
 
 #include "platform/sdl/pinput_sdl.h"
 #include "platform/platform.h"
 
 
-SDL_Window* window = NULL;
-SDL_Surface* screen = NULL;
+/*! Border size that simulates the ZX Spectrum's border */
+#define BORDER_SIZE     (32)
+
+/*! Horizontal screen resolution in pixels, according to ZX Spectrum */
+#define RESOLUTION_X    (256)
+
+/*! Vertical screen resolution in pixels, according to ZX Spectrum */
+#define RESOLUTION_Y    (192)
+
+/*! Scale of the window initial size relative to resolution */
+#define WINDOW_SCALE    (2)
+
+
+SDL_Window      *window         = NULL;
+SDL_Surface     *screen         = NULL;
+SDL_Renderer    *renderer       = NULL;
 
 
 bool platform_init(void)
@@ -46,11 +61,13 @@ bool platform_init(void)
                 return false;
         }
 
+        atexit(SDL_Quit);
+
         window = SDL_CreateWindow("Skazka",
                 SDL_WINDOWPOS_UNDEFINED,
                 SDL_WINDOWPOS_UNDEFINED,
-                256*3,
-                192*3,
+                (RESOLUTION_X + 2*BORDER_SIZE) * WINDOW_SCALE,
+                (RESOLUTION_Y + 2*BORDER_SIZE) * WINDOW_SCALE,
                 SDL_WINDOW_SHOWN);
         if (window == NULL) {
                 SDL_Log("Could not create window: %s\n", SDL_GetError());
@@ -63,8 +80,24 @@ bool platform_init(void)
                 return false;
         }
 
-        Uint32 color = SDL_MapRGB(screen->format, 0xFF, 0xFF, 0xFF);
+        Uint32 color = SDL_MapRGB(screen->format, 0xD7, 0xD7, 0xD7);
         SDL_FillRect(screen, NULL, color);
+
+        renderer = SDL_CreateSoftwareRenderer(screen);
+        if (renderer == NULL) {
+                SDL_Log("Could note create renderer: %s\n", SDL_GetError());
+                return false;
+        }
+
+        SDL_Rect rect;
+        rect.x = (BORDER_SIZE) * WINDOW_SCALE;
+        rect.y = (BORDER_SIZE) * WINDOW_SCALE;
+        rect.w = RESOLUTION_X * WINDOW_SCALE;
+        rect.h = RESOLUTION_Y * WINDOW_SCALE;
+        SDL_RenderSetViewport(renderer, &rect);
+
+        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
+        SDL_RenderFillRect(renderer, NULL);
 
         return true;
 }
@@ -80,12 +113,15 @@ void platform_update(void)
 
 void platform_shutdown(void)
 {
+        if (renderer != NULL) {
+                SDL_DestroyRenderer(renderer);
+                renderer = NULL;
+        }
+
         if (window != NULL) {
                 SDL_DestroyWindow(window);
                 window = NULL;
         }
-
-        SDL_Quit();
 }
 
 /* EOF */

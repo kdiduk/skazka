@@ -30,8 +30,6 @@
  * \copyright   GNU General Public License
  */
 
-#include <stdbool.h>
-
 #include "platform/platform.h"
 #include "scenes/scene.h"
 #include "game.h"
@@ -40,9 +38,14 @@
 bool running;
 
 
-void game_init(void)
+bool game_init(void)
 {
-        platform_init();
+        if (platform_init() == false) {
+                platform_shutdown();
+                return false;
+        }
+
+        return true;
 }
 
 

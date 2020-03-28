@@ -35,7 +35,10 @@
 
 int main(void)
 {
-        game_init();
+        if (game_init() == false) {
+                return EXIT_FAILURE;
+        }
+
         game_run();
 
         return EXIT_SUCCESS;
