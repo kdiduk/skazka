@@ -4,7 +4,7 @@ LD = zcc +zx
 AR = appmake +zx
 
 PVPATH = src/platform/zx
-POBJECTS = platform_zx.o pinput_zx.o
+POBJECTS = platform_zx.o pinput_zx.o pscreen_zx.o
 
 # Origin of the game binary. Default value is 32768.
 # For other values, add `-zorg=${ZORG}` option to `zcc` command.
@@ -21,3 +21,5 @@ ARFLAGS = --blockname $(PROJECT) --org $(ZORG)
 # additional rule to make loadable tape-file
 APPMAKE = $(AR) $(ARFLAGS) -b $(BINDIR)/$(PROJECT)_CODE.bin \
 	-o $(BINDIR)/$(PROJECT).tap
+
+# end of ZX Spectrum related make configuration
