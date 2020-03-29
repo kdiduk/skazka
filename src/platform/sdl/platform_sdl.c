@@ -48,53 +48,35 @@
 /*! Scale of the window initial size relative to resolution */
 #define WINDOW_SCALE    (2)
 
+static const char* WINDOW_TITLE = "Skazka";
+
 
 SDL_Window      *window         = NULL;
 SDL_Surface     *screen         = NULL;
 SDL_Renderer    *renderer       = NULL;
 
 
+static bool init_sdl(void);
+static bool init_window(void);
+static bool init_renderer(void);
+
+
 bool platform_init(void)
 {
-        if (SDL_Init(SDL_INIT_VIDEO) != 0) {
-                SDL_Log("Unable to initialize SDL: %s", SDL_GetError());
+        if (init_sdl() == false) {
                 return false;
         }
 
-        atexit(SDL_Quit);
-
-        window = SDL_CreateWindow("Skazka",
-                SDL_WINDOWPOS_UNDEFINED,
-                SDL_WINDOWPOS_UNDEFINED,
-                (RESOLUTION_X + 2*BORDER_SIZE) * WINDOW_SCALE,
-                (RESOLUTION_Y + 2*BORDER_SIZE) * WINDOW_SCALE,
-                SDL_WINDOW_SHOWN);
-        if (window == NULL) {
-                SDL_Log("Could not create window: %s\n", SDL_GetError());
-                return false;
-        }
-
-        screen = SDL_GetWindowSurface(window);
-        if (screen == NULL) {
-                SDL_Log("Could not get window surface: %s\n", SDL_GetError());
+        if (init_window() == false) {
                 return false;
         }
 
         Uint32 color = SDL_MapRGB(screen->format, 0xD7, 0xD7, 0xD7);
         SDL_FillRect(screen, NULL, color);
 
-        renderer = SDL_CreateSoftwareRenderer(screen);
-        if (renderer == NULL) {
-                SDL_Log("Could note create renderer: %s\n", SDL_GetError());
+        if (init_renderer() == false) {
                 return false;
         }
-
-        SDL_Rect rect;
-        rect.x = (BORDER_SIZE) * WINDOW_SCALE;
-        rect.y = (BORDER_SIZE) * WINDOW_SCALE;
-        rect.w = RESOLUTION_X * WINDOW_SCALE;
-        rect.h = RESOLUTION_Y * WINDOW_SCALE;
-        SDL_RenderSetViewport(renderer, &rect);
 
         SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
         SDL_RenderFillRect(renderer, NULL);
@@ -123,5 +105,65 @@ void platform_shutdown(void)
                 window = NULL;
         }
 }
+
+
+static bool init_sdl(void)
+{
+        if (SDL_Init(SDL_INIT_VIDEO) != 0) {
+                SDL_Log("Unable to initialize SDL: %s\n", SDL_GetError());
+                return false;
+        }
+
+        if (atexit(SDL_Quit) != 0) {
+                SDL_Log("Failed to set up `atexit()` function\n");
+                SDL_Quit();
+                return false;
+        }
+
+        return true;
+}
+
+
+static bool init_window(void)
+{
+        window = SDL_CreateWindow(WINDOW_TITLE,
+                SDL_WINDOWPOS_UNDEFINED,
+                SDL_WINDOWPOS_UNDEFINED,
+                (RESOLUTION_X + 2*BORDER_SIZE) * WINDOW_SCALE,
+                (RESOLUTION_Y + 2*BORDER_SIZE) * WINDOW_SCALE,
+                SDL_WINDOW_SHOWN);
+        if (window == NULL) {
+                SDL_Log("Could not create window: %s\n", SDL_GetError());
+                return false;
+        }
+
+        screen = SDL_GetWindowSurface(window);
+        if (screen == NULL) {
+                SDL_Log("Could not get window surface: %s\n", SDL_GetError());
+                return false;
+        }
+
+        return true;
+}
+
+
+static bool init_renderer(void)
+{
+        renderer = SDL_CreateSoftwareRenderer(screen);
+        if (renderer == NULL) {
+                SDL_Log("Could note create renderer: %s\n", SDL_GetError());
+                return false;
+        }
+
+        SDL_Rect rect;
+        rect.x = (BORDER_SIZE) * WINDOW_SCALE;
+        rect.y = (BORDER_SIZE) * WINDOW_SCALE;
+        rect.w = RESOLUTION_X * WINDOW_SCALE;
+        rect.h = RESOLUTION_Y * WINDOW_SCALE;
+        SDL_RenderSetViewport(renderer, &rect);
+
+        return true;
+}
+
 
 /* EOF */
