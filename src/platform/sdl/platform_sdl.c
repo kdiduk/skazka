@@ -33,32 +33,14 @@
 #include <stdlib.h>
 
 #include "platform/sdl/pinput_sdl.h"
+#include "platform/sdl/window.h"
 #include "platform/platform.h"
-
-
-/*! Border size that simulates the ZX Spectrum's border */
-#define BORDER_SIZE     (32)
-
-/*! Horizontal screen resolution in pixels, according to ZX Spectrum */
-#define RESOLUTION_X    (256)
-
-/*! Vertical screen resolution in pixels, according to ZX Spectrum */
-#define RESOLUTION_Y    (192)
-
-/*! Scale of the window initial size relative to resolution */
-#define WINDOW_SCALE    (2)
-
-static const char* WINDOW_TITLE = "Skazka";
-
-
-SDL_Window      *window         = NULL;
-SDL_Surface     *screen         = NULL;
-SDL_Renderer    *renderer       = NULL;
+#include "game.h"
 
 
 static bool init_sdl(void);
-static bool init_window(void);
-static bool init_renderer(void);
+static void update_events(void);
+static void update_window_event(SDL_WindowEvent* event);
 
 
 bool platform_init(void)
@@ -67,19 +49,9 @@ bool platform_init(void)
                 return false;
         }
 
-        if (init_window() == false) {
+        if (window_create() == false) {
                 return false;
         }
-
-        Uint32 color = SDL_MapRGB(screen->format, 0xD7, 0xD7, 0xD7);
-        SDL_FillRect(screen, NULL, color);
-
-        if (init_renderer() == false) {
-                return false;
-        }
-
-        SDL_SetRenderDrawColor(renderer, 0x00, 0x00, 0x00, 0xFF);
-        SDL_RenderFillRect(renderer, NULL);
 
         return true;
 }
@@ -87,23 +59,15 @@ bool platform_init(void)
 
 void platform_update(void)
 {
-        SDL_UpdateWindowSurface(window);
+        window_update();
+        update_events();
         SDL_Delay(20);
-        pinput_sdl_update();
 }
 
 
 void platform_shutdown(void)
 {
-        if (renderer != NULL) {
-                SDL_DestroyRenderer(renderer);
-                renderer = NULL;
-        }
-
-        if (window != NULL) {
-                SDL_DestroyWindow(window);
-                window = NULL;
-        }
+        window_destroy();
 }
 
 
@@ -124,45 +88,36 @@ static bool init_sdl(void)
 }
 
 
-static bool init_window(void)
+static void update_events(void)
 {
-        window = SDL_CreateWindow(WINDOW_TITLE,
-                SDL_WINDOWPOS_UNDEFINED,
-                SDL_WINDOWPOS_UNDEFINED,
-                (RESOLUTION_X + 2*BORDER_SIZE) * WINDOW_SCALE,
-                (RESOLUTION_Y + 2*BORDER_SIZE) * WINDOW_SCALE,
-                SDL_WINDOW_SHOWN);
-        if (window == NULL) {
-                SDL_Log("Could not create window: %s\n", SDL_GetError());
-                return false;
+        SDL_Event event;
+        while (SDL_PollEvent(&event) == 1) {
+                switch (event.type) {
+                        case SDL_QUIT:
+                                game_quit();
+                                break;
+                        case SDL_KEYDOWN:
+                        case SDL_KEYUP:
+                                pinput_sdl_update(&event.key);
+                                break;
+                        case SDL_WINDOWEVENT:
+                                update_window_event(&event.window);
+                                break;
+                }
         }
-
-        screen = SDL_GetWindowSurface(window);
-        if (screen == NULL) {
-                SDL_Log("Could not get window surface: %s\n", SDL_GetError());
-                return false;
-        }
-
-        return true;
 }
 
 
-static bool init_renderer(void)
+void update_window_event(SDL_WindowEvent* event)
 {
-        renderer = SDL_CreateSoftwareRenderer(screen);
-        if (renderer == NULL) {
-                SDL_Log("Could note create renderer: %s\n", SDL_GetError());
-                return false;
+        switch (event->event) {
+                case SDL_WINDOWEVENT_SIZE_CHANGED:
+                        window_resize(event->data1, event->data2);
+                        break;
+                case SDL_WINDOWEVENT_CLOSE:
+                        game_quit();
+                        break;
         }
-
-        SDL_Rect rect;
-        rect.x = (BORDER_SIZE) * WINDOW_SCALE;
-        rect.y = (BORDER_SIZE) * WINDOW_SCALE;
-        rect.w = RESOLUTION_X * WINDOW_SCALE;
-        rect.h = RESOLUTION_Y * WINDOW_SCALE;
-        SDL_RenderSetViewport(renderer, &rect);
-
-        return true;
 }
 
 

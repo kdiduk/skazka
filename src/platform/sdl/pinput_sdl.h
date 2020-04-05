@@ -29,8 +29,10 @@
  * \copyright   GNU General Public License
  */
 
+#include <SDL2/SDL_events.h>
 
-void pinput_sdl_update(void);
+
+void pinput_sdl_update(SDL_KeyboardEvent* event);
 
 
 /* EOF */

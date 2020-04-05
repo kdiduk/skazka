@@ -5,6 +5,6 @@ CFLAGS = -Wall -Wextra
 LDFLAGS = -lSDL2
 
 PVPATH = src/platform/sdl
-POBJECTS = platform_sdl.o pinput_sdl.o pscreen_sdl.o
+POBJECTS = platform_sdl.o pinput_sdl.o pscreen_sdl.o window.o
 
 # end of Linux-related make configuration

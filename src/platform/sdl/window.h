@@ -21,32 +21,31 @@
 * ************************************************************************** */
 
 /*!
- * \file        platform/sdl/pinput_sdl.c
+ * \file        platform/sdl/window.h
  *
- * \brief       SDL implementation of keyboar input module.
- * \author      Kirill Diduk
- * \date        21 March 2020, 15:32
+ * \brief       Header file with functions of the module `window`.
+ * \details     The module `window` is an internal module of the module
+ *       `platform`. This module implements main SDL window of the game app.
+ * \author      Kirill Diduk (kirill.diduk@mail.ru)
+ * \date        04 April 2020, 18:59
  * \copyright   GNU General Public License
  */
 
-#include <SDL2/SDL_events.h>
+#ifndef SKAZKA_PLATFORM_SDL_WINDOW_H
+#define SKAZKA_PLATFORM_SDL_WINDOW_H
+
 #include <stdbool.h>
 
-#include "platform/pinput.h"
-#include "game.h"
+
+bool window_create(void);
+
+void window_update(void);
+
+void window_resize(int x, int y);
+
+void window_destroy(void);
 
 
-bool pinput_pressed(enum pinput_key key)
-{
-        (void) key;
-
-        return false;
-}
-
-
-void pinput_sdl_update(SDL_KeyboardEvent* event)
-{
-        (void) event;
-}
+#endif /* SKAZKA_PLATFORM_SDL_WINDOW_H */
 
 /* EOF */
