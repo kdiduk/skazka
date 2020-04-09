@@ -32,10 +32,10 @@
 #include <SDL2/SDL.h>
 #include <stdlib.h>
 
-#include "platform/sdl/pinput_sdl.h"
-#include "platform/sdl/window.h"
 #include "platform/platform.h"
 #include "game.h"
+#include "pinput_sdl.h"
+#include "window.h"
 
 
 static bool init_sdl(void);

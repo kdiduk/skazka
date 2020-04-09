@@ -26,8 +26,8 @@
  * \copyright   GNU General Public License
  */
 
+#include "scenes/scene.h"
 #include "title/title_scene.h"
-#include "scene.h"
 
 
 static enum sceneid current_scene = SCENE_INITIAL;

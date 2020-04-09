@@ -3,7 +3,7 @@
 VPATH = src:src/scenes:src/scenes/title:$(PVPATH)
 OBJDIR = obj/$(TARGET)
 BINDIR = bin/$(TARGET)
-INCLUDE = -Isrc
+INCLUDE = -Iinclude
 OBJECTS = $(addprefix $(OBJDIR)/, \
 	$(POBJECTS)	\
 	game.o		\
